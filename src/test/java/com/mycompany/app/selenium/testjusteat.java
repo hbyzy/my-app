@@ -1,6 +1,9 @@
 package com.example.tests;
-
+import java.io.*;
+import  java.sql.*;
+import java.util.List;
 import java.util.Objects;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.*;
@@ -25,7 +28,7 @@ public class testjusteat {
     private String wtotalt;
     private float total;
     private boolean tcal;
-
+    String wname="c:\\deleteable\\rname.txt";
     @Before
     public void setUp() throws Exception {
         //driver = new FirefoxDriver();
@@ -40,6 +43,21 @@ public class testjusteat {
         baseUrl = "https://www.just-eat.ca";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
+    public void wfile(String fname, List<WebElement> rname, List<WebElement> rstyle) throws IOException {
+        File file= new File(fname);
+        if (!file.exists())
+            file.createNewFile();
+
+        FileOutputStream fos=new FileOutputStream(file);
+        OutputStreamWriter  wfos= new OutputStreamWriter(fos);
+        for(int i=0;i<rname.size();i++){
+            String str=rname.get(i).getText()+"\t"+"||"+rstyle.get(i).getText();
+            wfos.write(str+"\n\r");
+        }
+        wfos.flush();
+        wfos.close();
+
+    }
 
     @Test
     public void testUntitled() throws Exception {
@@ -50,8 +68,25 @@ public class testjusteat {
         Thread.sleep(5000);
         driver.findElement(By.xpath("//section[@id='skipToMain']/div[2]/div/div/div/ul/li/strong[3]")).click();
         Thread.sleep(3000);
-
         assertEquals("Order take out in H3Z Montreal from JUST-EAT.ca", driver.getTitle());
+
+        /*
+        List<WebElement> rname= driver.findElements(By.className("listing-item-title"));
+        for (WebElement e:rname)
+        System.out.println(e.getText());
+        */
+        WebElement element =driver.findElement(By.cssSelector(".listing-group.listing-group--noSpacingTop.card"));
+        List<WebElement> rName= element.findElements(By.className("listing-item-title"));
+        List<WebElement> rStyle= element.findElements(By.cssSelector(".infoText.infoText--primary>strong"));
+        /*for (WebElement e:rName)
+            System.out.println(e.getText());
+        for (WebElement e:rStyle)
+            System.out.println(e.getText());
+        */
+        wfile(wname,rName,rStyle);
+
+
+
 
         Thread.sleep(5000);
         driver.findElement(By.cssSelector("h3.listing-item-title")).click();
@@ -129,6 +164,29 @@ public class testjusteat {
     }
 
 
+    public void rfile(String rname) throws IOException {
+        File file=new File(rname);
+        if(!file.exists())
+            System.out.println("File not exist:"+rname);
+        //FileInputStream fis=new  FileInputStream(file);
+        BufferedReader filebuf= new BufferedReader(new FileReader(file));
+        //BufferedInputStream fisb= new BufferedInputStream(fis);
+        //InputStreamReader fisr=new InputStreamReader(fis);
+        String readline ;
+        do{
+            readline=filebuf.readLine();
+            System.out.println(readline);
+        }
+        while (readline!=null);
+        try {
+            filebuf.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     @After
     public void tearDown() throws Exception {
         driver.quit();
@@ -144,7 +202,9 @@ public class testjusteat {
             System.out.println("calculation is correct");
         else
             System.out.println("calculation is wrong");
+        rfile(wname);
     }
+
 
     private boolean isElementPresent(By by) {
         try {
