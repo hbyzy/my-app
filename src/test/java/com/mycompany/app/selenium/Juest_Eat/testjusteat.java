@@ -1,9 +1,7 @@
-package com.example.tests;
+package com.mycompany.app.selenium.Juest_Eat;
 import java.io.*;
-import  java.sql.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.*;
