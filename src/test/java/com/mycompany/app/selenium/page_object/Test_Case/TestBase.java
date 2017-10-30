@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
-    public static WebDriver driver;
+    public WebDriver driver;
     public String baseUrl;
     public int timeout=5000;
     public int interval=500;
