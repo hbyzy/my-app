@@ -51,6 +51,7 @@ public class testjusteat {
         for(int i=0;i<rname.size();i++){
             String str=rname.get(i).getText()+"\t"+"||"+rstyle.get(i).getText();
             wfos.write(str+"\n\r");
+
         }
         wfos.flush();
         wfos.close();
