@@ -15,12 +15,17 @@ public class fileOperate {
         if (file.exists()) {
             if (oldFile.exists()) {
                 oldFile.delete();
-                Boolean fileRen=file.renameTo(oldFile);
-                Boolean fukeDel=file.delete();
-            } else
-                file.createNewFile();
-        }
+                Boolean fileRen = file.renameTo(oldFile);
+                Boolean fileDel = file.delete();
+            } else {
+                Boolean fileRen = file.renameTo(oldFile);
+                Boolean fileDel = file.delete();
+            }
+        } else
+            file.createNewFile();
     }
+
+
 
     public void testFileWrite(ArrayList Fwrite) throws IOException {
         if (!file.exists()) {
