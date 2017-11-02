@@ -2,6 +2,8 @@ package com.mycompany.app.selenium.page_object.Test_Case;
 
 import com.mycompany.app.selenium.page_object.Page_Elements.HomePage;
 import com.mycompany.app.selenium.page_object.assess.HomePageAsser;
+import com.mycompany.app.selenium.page_object.function.TestBase;
+import com.mycompany.app.selenium.page_object.function.fileOperate;
 import com.mycompany.app.selenium.page_object.page_actions.HomePageActions;
 import org.junit.After;
 import org.junit.Before;
@@ -19,11 +21,18 @@ public class Test_concordia extends TestBase {
     List<String> handles;
     public ArrayList fileStr = new ArrayList();
     String begin = "------------------------------";
+    HomePage homePage;
+    HomePageActions homePageAction;
+    HomePageAsser homePageAsser;
 
     @Before
     public void setup() {
         driver = super.driver;
-        super.pageLoad();
+        super.pageLoad("http://www.concordia.ca");
+        homePage=new HomePage(driver);
+        homePageAction = new HomePageActions(driver);
+        homePageAsser = new HomePageAsser(driver);
+
         fileOperate fileOperate = new fileOperate();
         try {
             fileOperate.filePrepare();
@@ -34,9 +43,9 @@ public class Test_concordia extends TestBase {
 
     @Test
     public void aboutSubMenuTest() throws Exception {
-        HomePage homePage = new HomePage(driver);
-        HomePageActions homePageAction = new HomePageActions(driver);
-        HomePageAsser homePageAsser = new HomePageAsser(driver);
+        //HomePage homePage = new HomePage(driver);
+        //HomePageActions homePageAction = new HomePageActions(driver);
+        //HomePageAsser homePageAsser = new HomePageAsser(driver);
         String[] subMenu;
         String subPageName;
         subMenu = homePage.subMenu(homePage.menu_about, homePage.aboutCss);
@@ -97,8 +106,8 @@ public class Test_concordia extends TestBase {
 
     @Test
     public void testAbout() throws Exception {
-        HomePageActions homePageAction = new HomePageActions(driver);
-        HomePageAsser homePageAsser = new HomePageAsser((driver));
+        //HomePageActions homePageAction = new HomePageActions(driver);
+        //HomePageAsser homePageAsser = new HomePageAsser((driver));
 
         homePageAction.mAboutClick();
         homePageAsser.PageChangeAssert("About");
@@ -106,8 +115,8 @@ public class Test_concordia extends TestBase {
 
     @Test
     public void testAdmission() throws Exception {
-        HomePageActions homePageAction = new HomePageActions(driver);
-        HomePageAsser homePageAsser = new HomePageAsser(driver);
+        //HomePageActions homePageAction = new HomePageActions(driver);
+        //HomePageAsser homePageAsser = new HomePageAsser(driver);
 
         homePageAction.mAdmissionsClick();
         homePageAsser.PageChangeAssert("Admission");
@@ -115,8 +124,8 @@ public class Test_concordia extends TestBase {
 
     @Test
     public void testCampusLife() throws Exception {
-        HomePageActions homePageAction = new HomePageActions(driver);
-        HomePageAsser homePageAsser = new HomePageAsser(driver);
+       // HomePageActions homePageAction = new HomePageActions(driver);
+       // HomePageAsser homePageAsser = new HomePageAsser(driver);
 
         homePageAction.mCampusLifeClick();
         homePageAsser.PageChangeAssert("Campus-life");
@@ -125,8 +134,8 @@ public class Test_concordia extends TestBase {
 
     @Test
     public void testResearch() throws Exception {
-        HomePageActions homePageAction = new HomePageActions(driver);
-        HomePageAsser homePageAsser = new HomePageAsser(driver);
+        //HomePageActions homePageAction = new HomePageActions(driver);
+        //HomePageAsser homePageAsser = new HomePageAsser(driver);
 
         homePageAction.mResearchClick();
         homePageAsser.PageChangeAssert("Research");
@@ -135,8 +144,8 @@ public class Test_concordia extends TestBase {
 
     @Test
     public void testInternational() throws Exception {
-        HomePageActions homePageAction = new HomePageActions(driver);
-        HomePageAsser homePageAsser = new HomePageAsser(driver);
+        //HomePageActions homePageAction = new HomePageActions(driver);
+        //HomePageAsser homePageAsser = new HomePageAsser(driver);
 
         homePageAction.mInternationalClick();
         homePageAsser.PageChangeAssert("International");

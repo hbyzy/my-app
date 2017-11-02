@@ -1,4 +1,4 @@
-package com.mycompany.app.selenium.page_object.Test_Case;
+package com.mycompany.app.selenium.page_object.function;
 
 import java.io.*;
 import java.util.ArrayList;

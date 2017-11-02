@@ -1,4 +1,4 @@
-package com.mycompany.app.selenium.page_object.Test_Case;
+package com.mycompany.app.selenium.page_object.function;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,8 +24,8 @@ public class TestBase {
         driver= new ChromeDriver(chromeOptions);
     }
 
-    public void pageLoad(){
-        baseUrl="http://www.concordia.ca";
+    public void pageLoad(String url){
+        baseUrl=url;
         driver.get(baseUrl+"/");
         driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
     }

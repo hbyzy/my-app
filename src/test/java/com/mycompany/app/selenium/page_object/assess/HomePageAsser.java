@@ -24,7 +24,7 @@ public class HomePageAsser {
             } else {
                 currentHandle = driver.getWindowHandle();
                 handles = driver.getWindowHandles();
-                if (handles.size() > 0) {
+                if (handles.size() > 1) {
                     for (String e : handles) {
                         if (!e.equals(currentHandle)) {
                             driver.switchTo().window(e);
