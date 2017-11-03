@@ -16,7 +16,7 @@ public class TestBase {
     String osName= (System.getProperty("os.name"));
 
     if (osName.equalsIgnoreCase("Mac OS X"))
-        System.setProperty("webdrier.chrome.driver", "src/test/resources/drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
     else   System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
 
         ChromeOptions chromeOptions =new ChromeOptions();
