@@ -16,8 +16,10 @@ import java.util.Properties;
 
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class BitCoin {
@@ -43,7 +45,18 @@ public class BitCoin {
                     .body("CAD", is(not(equalTo(7971.29))));
         }
     }
-
+    @Test
+    public void testLogin(){
+        given().log().uri().
+                when().param("username","ivy").
+                param("password","123456").
+                post("http://192.168.88.187:8080/o2oeat/api/login.json").then().
+                statusCode(200).
+                body("role[0].name",equalTo("Customer")).
+                body("shop.name",equalTo("PinPin 1101")).
+                body("shop.address.address1",equalTo("5253 Decarie")).
+                body("shop.shopImageList.imageByShop.src",hasItem("https://pinpinmarket.s3.amazonaws.com/i/1_shop1.png"));
+    }
     @Test
     public void bitCoinError(){
         HashMap<String, String> currencyPair = new HashMap<>();
@@ -61,7 +74,7 @@ public class BitCoin {
 
     @Test
     public void getjason() {
-        ValidatableResponse jason = given().log().uri().when().get(host + "/data/price?fsym=eTH&tsyms=CAD").then();
+        ValidatableResponse jason = given().get(host + "/data/price?fsym=eTH&tsyms=CAD").then();
         System.out.println(jason);
         jason.body("Response",equalTo("Error"));
         System.out.println(jason.body("Message",equalTo("There is no data for the symbol eTH .")));
